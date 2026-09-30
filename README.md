@@ -1,7 +1,7 @@
 # SmartPlant
 
 <p align="center">
-  SmartPlant is a smart irrigation platform for paddy fields, combining ESP32 hardware, a Flask backend, and a web dashboard for real-time monitoring and pump control.
+  SmartPlant is a smart irrigation platform for paddy fields, combining ESP32 hardware, a Flask server, and a web dashboard for real-time monitoring and pump control.
 </p>
 
 <p align="center">
@@ -11,17 +11,17 @@
 </p>
 
 <p align="center">
-  <a href="frontend/SETUP_GUIDE.md">
-    <img src="https://img.shields.io/badge/Frontend%20Setup-1D4ED8?style=for-the-badge&logo=readthedocs&logoColor=white" alt="Frontend Setup" />
+  <a href="client/SETUP_GUIDE.md">
+    <img src="https://img.shields.io/badge/Client%20Setup-1D4ED8?style=for-the-badge&logo=readthedocs&logoColor=white" alt="Client Setup" />
   </a>
-  <a href="backend/hardware/HARDWARE_GUIDE.md">
-    <img src="https://img.shields.io/badge/Hardware%20Guide-92400E?style=for-the-badge&logo=arduino&logoColor=white" alt="Hardware Guide" />
+  <a href="server/hardware/HARDWARE_GUIDE.md">
+    <img src="https://img.shields.io/badge/Server%20Guide-92400E?style=for-the-badge&logo=arduino&logoColor=white" alt="Server Guide" />
   </a>
 </p>
 
 ## Overview
 
-SmartPlant helps growers monitor soil moisture, temperature, humidity, and irrigation status from a single dashboard. Sensor readings are collected by the ESP32, processed by the backend, and displayed in the web interface for quick action.
+SmartPlant helps growers monitor soil moisture, temperature, humidity, and irrigation status from a single dashboard. Sensor readings are collected by the ESP32, processed by the server, and displayed in the web interface for quick action.
 
 ## Features
 
@@ -35,13 +35,13 @@ SmartPlant helps growers monitor soil moisture, temperature, humidity, and irrig
 
 ## How It Works
 
-1. The ESP32 reads sensor data from the field and sends it to the backend API.
-2. The backend stores the readings, applies irrigation logic, and serves app data.
+1. The ESP32 reads sensor data from the field and sends it to the server API.
+2. The server stores the readings, applies irrigation logic, and serves app data.
 3. The dashboard shows live values, alerts, and controls for monitoring and action.
 
 ```mermaid
 flowchart LR
-  ESP32[ESP32 + Sensors] --> API[Flask Backend API]
+  ESP32[ESP32 + Sensors] --> API[Flask Server API]
   API --> DB[(SQLite + Model)]
   API --> UI[Web Dashboard]
   UI --> Farmer[Farmer / Operator]
@@ -51,40 +51,40 @@ flowchart LR
 
 | Layer | Tools |
 | --- | --- |
-| Backend | Flask, SQLite, Pandas, scikit-learn, JWT, Web Push |
-| Frontend | HTML, CSS, JavaScript, Tailwind CSS, PWA |
+| Server | Flask, SQLite, Pandas, scikit-learn, JWT, Web Push |
+| Client | HTML, CSS, JavaScript, Tailwind CSS, PWA |
 | Hardware | ESP32, soil moisture sensor, DHT sensor, relay / pump |
 
 ## Quick Start
 
-### Backend
+### Server
 
 ```bash
-cd backend
+cd server
 pip install -r requirements.txt
 python app.py
 ```
 
-The backend runs locally at `http://localhost:5000` during development.
+The server runs locally at `http://localhost:5000` during development.
 
-### Frontend
+### Client
 
-Open `frontend/index.html` in your browser or serve the `frontend` folder with any static file server.
+Open `client/index.html` in your browser or serve the `client` folder with any static file server.
 
 ### Hardware
 
-Use `Smart_Plant.ino` or the hardware guide in `backend/hardware/` to connect the ESP32, sensors, and relay.
+Use `Smart_Plant.ino` or the hardware guide in `server/hardware/` to connect the ESP32, sensors, and relay.
 
 ## Deployment
 
-- Use [render.yaml](render.yaml) for the backend service on Render.
+- Use [render.yaml](render.yaml) for the server service on Render.
 - Set the required environment variables for JWT, ESP device access, and VAPID push keys.
-- If the backend URL changes, update the API base in [frontend/index.html](frontend/index.html).
+- If the server URL changes, update the API base in [client/index.html](client/index.html).
 
 ## Documentation
 
-- [Frontend setup guide](frontend/SETUP_GUIDE.md)
-- [Hardware integration guide](backend/hardware/HARDWARE_GUIDE.md)
+- [Client setup guide](client/SETUP_GUIDE.md)
+- [Server hardware guide](server/hardware/HARDWARE_GUIDE.md)
 
 ## Notes
 

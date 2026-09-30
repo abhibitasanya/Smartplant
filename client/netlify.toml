@@ -1,8 +1,5 @@
 [build]
-<<<<<<< HEAD
-=======
-  base    = "frontend/frontend"
->>>>>>> c607309 (Initial commit)
+  base    = "client"
   publish = "."
 
 [[headers]]

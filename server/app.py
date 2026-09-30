@@ -13,11 +13,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.model_selection import train_test_split
 
-<<<<<<< HEAD
-from flask import Flask, jsonify, request
-=======
 from flask import Flask, jsonify, request, send_from_directory
->>>>>>> c607309 (Initial commit)
 from flask_cors import CORS
 from werkzeug.security import check_password_hash, generate_password_hash
 import requests
@@ -57,17 +53,9 @@ VAPID_CLAIMS_EMAIL = os.getenv("SMARTPLANT_VAPID_EMAIL", "mailto:smartplant@exam
 PUSH_ENABLED = bool(WEBPUSH_AVAILABLE and VAPID_PRIVATE_KEY and VAPID_PUBLIC_KEY)
 
 if REQUIRE_ESP_DEVICE_KEY and not ESP_DEVICE_KEY:
-<<<<<<< HEAD
-    
-    # ─── Weather API Configuration ────────────────────────────────────────
-    WEATHER_API_URL = os.getenv("SMARTPLANT_WEATHER_API_URL", "https://api.openweathermap.org/data/2.5/weather")
-    WEATHER_API_KEY = os.getenv("SMARTPLANT_WEATHER_API_KEY", "")
-    raise RuntimeError("SMARTPLANT_ESP_DEVICE_KEY must be set when SMARTPLANT_REQUIRE_ESP_DEVICE_KEY is enabled")
-=======
     # ─── Defaulting for development ───
     ESP_DEVICE_KEY = "12345"
     print(f"[WARN] SMARTPLANT_ESP_DEVICE_KEY not set. Using default: {ESP_DEVICE_KEY}")
->>>>>>> c607309 (Initial commit)
 
 
 def train_model_from_csv(data_path=DATA_PATH, model_out=MODEL_PATH):
@@ -1130,23 +1118,20 @@ def push_unsubscribe():
     con.close()
     return jsonify({"message": "unsubscribed", "deleted": deleted})
 
-<<<<<<< HEAD
-=======
 # ═══════════════════════════════════════════════════════════════
-# FRONTEND STATIC ROUTES
+# CLIENT STATIC ROUTES
 # ═══════════════════════════════════════════════════════════════
-FRONTEND_DIR = os.path.join(os.path.dirname(os.path.dirname(BASE_DIR)), "frontend", "frontend")
+CLIENT_DIR = os.path.join(os.path.dirname(os.path.dirname(BASE_DIR)), "client")
 
 @app.route("/")
 def serve_index():
-    return send_from_directory(FRONTEND_DIR, "index.html")
+    return send_from_directory(CLIENT_DIR, "index.html")
 
 @app.route("/<path:path>")
 def serve_static(path):
-    if os.path.exists(os.path.join(FRONTEND_DIR, path)):
-        return send_from_directory(FRONTEND_DIR, path)
-    return send_from_directory(FRONTEND_DIR, "index.html")
->>>>>>> c607309 (Initial commit)
+    if os.path.exists(os.path.join(CLIENT_DIR, path)):
+        return send_from_directory(CLIENT_DIR, path)
+    return send_from_directory(CLIENT_DIR, "index.html")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="SmartPlant backend")
@@ -1168,9 +1153,6 @@ if __name__ == "__main__":
     if args.train_model:
         train_model_from_csv()
     else:
-<<<<<<< HEAD
-        app.run(host="0.0.0.0", port=5000, debug=True)
-=======
         port = int(os.getenv("PORT", 5000))
         debug = os.getenv("FLASK_ENV", "production").strip().lower() == "development"
         import socket
@@ -1185,4 +1167,3 @@ if __name__ == "__main__":
             print(f"[SERVER] Started on all interfaces (port {port})")
 
         app.run(host="0.0.0.0", port=port, debug=debug)
->>>>>>> c607309 (Initial commit)
