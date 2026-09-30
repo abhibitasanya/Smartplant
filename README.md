@@ -1,7 +1,7 @@
 # SmartPlant
 
 <p align="center">
-  SmartPlant is a smart irrigation platform for paddy fields, combining ESP32 hardware, a Flask server, and a web dashboard for real-time monitoring and pump control.
+  SmartPlant is a smart irrigation platform for paddy fields, combining ESP32 hardware, a Flask backend, and a web dashboard for real-time monitoring and pump control.
 </p>
 
 <p align="center">
@@ -21,7 +21,7 @@
 
 ## Overview
 
-SmartPlant helps growers monitor soil moisture, temperature, humidity, and irrigation status from a single dashboard. Sensor readings are collected by the ESP32, processed by the server, and displayed in the web interface for quick action.
+SmartPlant helps growers monitor soil moisture, temperature, humidity, and irrigation status from a single dashboard. Sensor readings are collected by the ESP32, processed by the backend, and displayed in the web interface for quick action.
 
 ## Features
 
@@ -35,13 +35,13 @@ SmartPlant helps growers monitor soil moisture, temperature, humidity, and irrig
 
 ## How It Works
 
-1. The ESP32 reads sensor data from the field and sends it to the server API.
-2. The server stores the readings, applies irrigation logic, and serves app data.
+1. The ESP32 reads sensor data from the field and sends it to the backend API.
+2. The backend stores the readings, applies irrigation logic, and serves app data.
 3. The dashboard shows live values, alerts, and controls for monitoring and action.
 
 ```mermaid
 flowchart LR
-  ESP32[ESP32 + Sensors] --> API[Flask Server API]
+  ESP32[ESP32 + Sensors] --> API[Flask Backend API]
   API --> DB[(SQLite + Model)]
   API --> UI[Web Dashboard]
   UI --> Farmer[Farmer / Operator]
