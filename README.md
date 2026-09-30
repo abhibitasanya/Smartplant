@@ -25,11 +25,13 @@ SmartPlant helps growers monitor soil moisture, temperature, humidity, and irrig
 
 ## Features
 
-- Real-time field monitoring
-- Irrigation prediction with machine learning
-- Manual pump control from the dashboard
-- Browser notifications for alerts
-- PWA support for mobile-style access
+| Feature | What it does |
+| --- | --- |
+| Real-time monitoring | Shows soil moisture, temperature, humidity, and irrigation status. |
+| Irrigation prediction | Uses machine learning to estimate watering need. |
+| Manual pump control | Lets the user start irrigation from the dashboard. |
+| Browser notifications | Sends alerts for important updates. |
+| PWA support | Makes the dashboard feel like an installable app on mobile. |
 
 ## How It Works
 
@@ -37,11 +39,21 @@ SmartPlant helps growers monitor soil moisture, temperature, humidity, and irrig
 2. The backend stores the readings, applies irrigation logic, and serves app data.
 3. The dashboard shows live values, alerts, and controls for monitoring and action.
 
+```mermaid
+flowchart LR
+  ESP32[ESP32 + Sensors] --> API[Flask Backend API]
+  API --> DB[(SQLite + Model)]
+  API --> UI[Web Dashboard]
+  UI --> Farmer[Farmer / Operator]
+```
+
 ## Tech Stack
 
-- Backend: Flask, SQLite, Pandas, scikit-learn, JWT, Web Push
-- Frontend: HTML, CSS, JavaScript, Tailwind CSS, PWA
-- Hardware: ESP32, soil moisture sensor, DHT sensor, relay / pump
+| Layer | Tools |
+| --- | --- |
+| Backend | Flask, SQLite, Pandas, scikit-learn, JWT, Web Push |
+| Frontend | HTML, CSS, JavaScript, Tailwind CSS, PWA |
+| Hardware | ESP32, soil moisture sensor, DHT sensor, relay / pump |
 
 ## Quick Start
 
